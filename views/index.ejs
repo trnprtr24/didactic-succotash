@@ -1,0 +1,36 @@
+<%- include('header') -%>
+<div class="header">
+    <div class="overlay"></div>
+    <div class="header-content">
+        <div class="header-title"><%=taskTitle%></div>
+        <h1 class="header-title"><%=today%></h1>
+        <div class="header-subtitle">
+            <form action="/" method="post" id="myForm">
+                <input type="hidden" name="type" value="<%=taskTitle%>">
+                <input type="hidden" id="isDone" name="isDone" value="">
+                <div class="card">
+                    <% tasks.forEach(item => { %>
+                    <div class="item">
+                        <input type="checkbox" value="<%=item._id%>" onChange="clickcheckBox(this)"
+                            <% if(item.isDone){ %> checked <% } %>>
+                        <p><%=item.task%></p>
+                        <button class="btn-delete" type="submit" name="delete" value="<%=item._id%>">-</button>
+                    </div>
+                    <% }) %>
+
+                    <div class="item">
+                        <input type="text" name="newTask" placeholder="new task">
+                        <button type="submit">+</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function clickcheckBox(obj) {
+        document.getElementById("isDone").value = obj.value
+        document.getElementById("myForm").submit()
+    }
+</script>
+<%- include('footer') -%>
